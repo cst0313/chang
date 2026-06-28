@@ -404,12 +404,39 @@ img, svg {
    ───────────────────────────────────────────────── */
 .act-threshold {
   justify-content: center;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.act-threshold::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("img/city-fog.jpg");
+  background-size: cover;
+  background-position: 60% 35%;
+  background-repeat: no-repeat;
+  opacity: 0.20;
+  filter: grayscale(1) contrast(1.05) brightness(1.1);
+  mix-blend-mode: multiply;
+  z-index: -2;
+}
+.act-threshold::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(80% 60% at 30% 40%, transparent 0%, var(--paper) 70%),
+    linear-gradient(to bottom, var(--paper) 0%, rgba(244,239,230,0.4) 30%, rgba(244,239,230,0.4) 70%, var(--paper) 100%);
+  z-index: -1;
+  pointer-events: none;
 }
 .threshold-inner {
   max-width: var(--max);
   margin: 0 auto;
   width: 100%;
   position: relative;
+  z-index: 1;
 }
 .overline {
   font-family: var(--f-mono);
@@ -490,11 +517,52 @@ img, svg {
 /* ─────────────────────────────────────────────────
    ACT II — Origin
    ───────────────────────────────────────────────── */
+/* The Star Ferry, in fog. A real background — text reads above it. */
+.act-origin {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.act-origin::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: image-set(
+    url("img/harbour-fog.webp") type("image/webp"),
+    url("img/harbour-fog.jpg") type("image/jpeg")
+  );
+  background-image: url("img/harbour-fog.webp");
+  background-image: url("img/harbour-fog.jpg");
+  background-size: cover;
+  background-position: 58% 50%;
+  background-repeat: no-repeat;
+  opacity: 0.32;
+  filter: grayscale(1) contrast(1.06) brightness(1.06);
+  mix-blend-mode: multiply;
+  z-index: -2;
+}
+.act-origin::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 80% at 50% 50%, transparent 0%, var(--paper) 75%),
+    linear-gradient(to right, var(--paper) 0%, rgba(244,239,230,0.55) 35%, rgba(244,239,230,0.55) 65%, var(--paper) 100%),
+    linear-gradient(to bottom, var(--paper) 0%, rgba(244,239,230,0.0) 22%, rgba(244,239,230,0.0) 78%, var(--paper) 100%);
+  z-index: -1;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .act-origin::before { opacity: 0.22; }
+}
+
 .origin-inner {
   max-width: var(--max);
   margin: auto 0;
   width: 100%;
   padding-top: 3rem;
+  position: relative;
+  z-index: 1;
 }
 .head {
   font-family: var(--f-serif);
@@ -507,73 +575,6 @@ img, svg {
   max-width: 18ch;
   text-wrap: balance;
 }
-/* The plate — a clipping from an antique book, in dialogue with the head. */
-.origin-plate {
-  margin: clamp(2.4rem, 5vh, 4rem) 0 clamp(1.5rem, 3vh, 2.4rem);
-  max-width: min(880px, 100%);
-  position: relative;
-  isolation: isolate;
-}
-.origin-plate::before {
-  content: "";
-  position: absolute;
-  inset: -0.5rem;
-  background:
-    linear-gradient(135deg, rgba(255,255,255,0.5), rgba(255,255,255,0) 30%),
-    var(--paper-soft);
-  border: 1px solid var(--ink-line);
-  z-index: -1;
-  transform: rotate(-0.4deg);
-}
-.origin-plate picture,
-.origin-plate img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-.origin-plate img {
-  filter: sepia(28%) saturate(82%) contrast(0.97) brightness(1.04);
-  box-shadow: 0 18px 40px -22px rgba(22,20,18,0.32);
-  transition: filter var(--d-norm) var(--ease-out-expo);
-}
-.origin-plate:hover img {
-  filter: sepia(18%) saturate(96%) contrast(1.0) brightness(1.02);
-}
-.origin-plate-cap {
-  margin-top: 0.9rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5em 0.9em;
-  align-items: baseline;
-  font-family: var(--f-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
-}
-.origin-plate-no { color: var(--currents); }
-.origin-plate-sep { color: var(--ink-faint); }
-.origin-plate-text {
-  text-transform: none;
-  letter-spacing: 0.01em;
-  font-family: var(--f-serif);
-  font-style: italic;
-  font-weight: 360;
-  font-size: 0.95rem;
-  color: var(--ink-muted);
-  max-width: 56ch;
-  font-variation-settings: "opsz" 36, "SOFT" 60;
-}
-.origin-plate-text em {
-  font-style: normal;
-  font-family: var(--f-mono);
-  font-size: 0.78em;
-  letter-spacing: 0.06em;
-  color: var(--ink-faint);
-  vertical-align: 0.05em;
-  margin-right: 0.1em;
-}
-
 .origin-cols {
   display: grid;
   grid-template-columns: 1fr;
@@ -651,6 +652,14 @@ img, svg {
   letter-spacing: 0.08em;
   font-size: 1.05em;
   margin-right: 0.3em;
+  word-break: keep-all;
+  white-space: nowrap;
+}
+.lang-canto, .lang-canto + .lang-canto-rom {
+  white-space: nowrap;
+}
+.lang-canto-rom {
+  margin-left: 0.45em;
 }
 .aside-pill {
   font-family: var(--f-mono);

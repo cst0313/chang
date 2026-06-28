@@ -372,6 +372,110 @@
     </div>
   </section>
 
+  <!-- ╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴ -->
+  <!--                The hidden door.                  -->
+  <!-- ╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴ -->
+
+  <div id="door" class="door" role="region" aria-label="Door to the cabinet">
+    <button id="doorTrigger" class="door-trigger" type="button" aria-haspopup="dialog" aria-controls="puzzle" aria-label="Open the door">
+      <span class="door-glyph" aria-hidden="true">[ ]</span>
+      <span class="door-tip">there is one more instrument</span>
+    </button>
+  </div>
+
+  <div id="puzzle" class="puzzle" role="dialog" aria-modal="false" aria-labelledby="puzzleHead" aria-hidden="true">
+    <div class="puzzle-pane">
+      <button class="puzzle-close" type="button" aria-label="Close">×</button>
+
+      <p class="puzzle-mono"><span>VIII</span> / a door, with a question</p>
+
+      <h2 id="puzzleHead" class="puzzle-head">
+        A board, <span class="serif-italic">eight by eight.</span>
+      </h2>
+
+      <div class="puzzle-body">
+        <p>On the first square, one grain.</p>
+        <p>On the next, twice the previous.</p>
+        <p>On every next, twice again.</p>
+        <p class="puzzle-q">When the board is full, how many grains in total?</p>
+      </div>
+
+      <form id="puzzleForm" class="puzzle-form" autocomplete="off">
+        <label for="puzzleInput" class="puzzle-label">your answer</label>
+        <input
+          id="puzzleInput"
+          name="answer"
+          type="text"
+          inputmode="text"
+          spellcheck="false"
+          autocomplete="off"
+          autocapitalize="off"
+          aria-describedby="puzzleHint"
+        />
+        <button type="submit" class="puzzle-submit" aria-label="Submit">↵</button>
+      </form>
+
+      <p id="puzzleHint" class="puzzle-hint" aria-live="polite">a number — or the expression that names it</p>
+    </div>
+  </div>
+
+  <!-- ╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴ -->
+  <!--          The cabinet (hidden until opened)        -->
+  <!-- ╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴ -->
+
+  <section id="cabinet" class="act act-cabinet" data-act="08" aria-hidden="true">
+    <div class="act-mark">
+      <span class="act-no">08</span>
+      <span class="act-name">Cabinet</span>
+    </div>
+
+    <div class="cabinet-inner">
+      <h2 class="head">
+        So you <span class="serif-italic">found it.</span>
+      </h2>
+
+      <div class="cabinet-cols">
+        <div class="cabinet-col">
+          <p>
+            You read the page. You noticed the door. You did the math —
+            and you trusted that the door listened.
+          </p>
+          <p>
+            That is three signals already, which is more signal than most
+            résumés ever carry. Thank you for paying attention.
+          </p>
+          <p>
+            If you came with a reason — a research idea, a hard problem in
+            physics-informed ML or systematic trading, an offer that wants
+            someone who can hold three Olympiads in his head at once,
+            or simply a conversation about something nobody else will
+            sit through with you — please write.
+          </p>
+          <p class="cabinet-sign">
+            The line is open.<br/>
+            <a href="mailto:jsc323@ic.ac.uk?subject=The%20door%20opened" class="cabinet-mail">jsc323<span class="at">@</span>ic.ac.uk</a>
+          </p>
+        </div>
+
+        <aside class="cabinet-aside">
+          <p class="cabinet-mono">unfiled notes — not on the résumé</p>
+          <ul class="cabinet-list">
+            <li><span class="cabinet-key">currently learning</span><span>Rust, slowly, the way one learns a new language by translating poems.</span></li>
+            <li><span class="cabinet-key">unanswered</span><span>Whether a single physics-informed prior is worth a hundred labelled samples. Likely. Provably?</span></li>
+            <li><span class="cabinet-key">opening</span><span>Catalan, with a soft spot for the king's-bishop fianchetto. Black: Sicilian Najdorf.</span></li>
+            <li><span class="cabinet-key">debts</span><span>Two books I will reread until I die — <em>The Order of Time</em> and <em>The Art of Doing Science and Engineering</em>.</span></li>
+            <li><span class="cabinet-key">superstition</span><span>The best ideas arrive on the third lap of a Thames run, not the first.</span></li>
+          </ul>
+        </aside>
+      </div>
+
+      <p class="cabinet-postscript">
+        <span class="cabinet-mono">post-scriptum.</span>
+        The next instrument is being built quietly. Ask, and I will tell you.
+      </p>
+    </div>
+  </section>
+
   <footer class="finis">
     <div class="finis-left">
       <span class="finis-glyph">JC</span>

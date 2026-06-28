@@ -217,12 +217,152 @@
   function initSignature() {
     if (!window.console) return;
     const big = "%c jeffrey chang ";
-    const small = "%c\n an index — built by hand, served on paper.\n if you read source for a living, hello.\n jsc323 [at] ic.ac.uk\n";
+    const small = "%c\n an index — built by hand, served on paper.\n if you read source for a living, hello.\n jsc323 [at] ic.ac.uk\n\n there are seven instruments on this page.\n there is an eighth, hidden behind a small door.\n the door listens for a number.\n";
     console.log(
       big + small,
       "font: italic 700 22px/1 Georgia, serif; color: #F4EFE6; background: #1F3E5C; padding: 6px 14px; border-radius: 2px;",
       "font: 12px ui-monospace, monospace; color: #6E6862;"
     );
+  }
+
+  /* ──────────────────────────────────────────────
+     The door + the puzzle + the cabinet.
+     A small brainteaser: 2^64 - 1 (the chess + rice
+     problem, with the chessboard hint deliberately
+     baked into the prose so search engines can't
+     trivially fingerprint it). Accept several formats.
+     ────────────────────────────────────────────── */
+  function initPuzzle() {
+    const door     = document.getElementById("door");
+    const trigger  = document.getElementById("doorTrigger");
+    const puzzle   = document.getElementById("puzzle");
+    const closeBtn = puzzle && puzzle.querySelector(".puzzle-close");
+    const form     = document.getElementById("puzzleForm");
+    const input    = document.getElementById("puzzleInput");
+    const hint     = document.getElementById("puzzleHint");
+    const cabinet  = document.getElementById("cabinet");
+    if (!door || !puzzle || !form || !input || !hint || !cabinet) return;
+
+    const ANSWER = 18446744073709551615n; // 2^64 - 1
+    const SOLVED_KEY = "jc-cabinet-open";
+
+    function open() {
+      puzzle.classList.add("is-open");
+      puzzle.setAttribute("aria-hidden", "false");
+      setTimeout(() => input.focus(), 200);
+    }
+    function close() {
+      puzzle.classList.remove("is-open");
+      puzzle.setAttribute("aria-hidden", "true");
+    }
+    function unlock(silent) {
+      door.classList.add("is-opened");
+      cabinet.classList.add("is-open", "in-view");
+      cabinet.setAttribute("aria-hidden", "false");
+      try { localStorage.setItem(SOLVED_KEY, "1"); } catch (_) {}
+      if (!silent) {
+        // Update door tip to mark the threshold crossed.
+        const tip = trigger.querySelector(".door-tip");
+        if (tip) tip.textContent = "the cabinet is open";
+        setTimeout(() => {
+          close();
+          cabinet.scrollIntoView({ behavior: prefersReduced ? "auto" : "smooth", block: "start" });
+        }, 700);
+      }
+    }
+
+    // Restore previous unlock on revisit.
+    try { if (localStorage.getItem(SOLVED_KEY) === "1") unlock(true); } catch (_) {}
+
+    trigger.addEventListener("click", open);
+    closeBtn && closeBtn.addEventListener("click", close);
+    puzzle.addEventListener("click", (e) => { if (e.target === puzzle) close(); });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && puzzle.classList.contains("is-open")) close();
+    });
+
+    function normalise(raw) {
+      return (raw || "")
+        .toLowerCase()
+        .replaceAll(/[\s,_'`]+/g, "")
+        .replaceAll("**", "^")
+        .replaceAll("×", "*")
+        .replaceAll(/−/g, "-");
+    }
+
+    function tryParseBigInt(s) {
+      // Plain number, possibly scientific.
+      if (/^\d+$/.test(s)) {
+        try { return BigInt(s); } catch (_) { return null; }
+      }
+      // Expressions: 2^64-1, 2^64, (2^64)-1, etc.
+      const m = s.match(/^\(?2\^?(\d+)\)?(?:-1)?$/);
+      if (m) {
+        const exp = Number(m[1]);
+        if (exp >= 1 && exp <= 256) {
+          const v = 1n << BigInt(exp);
+          return s.endsWith("-1") ? v - 1n : v;
+        }
+      }
+      return null;
+    }
+
+    function check(raw) {
+      const s = normalise(raw);
+      if (!s) return "empty";
+
+      // Famous wrong-but-close answers — give a warm hint.
+      const closeWrongs = new Set(["64", "65", "2^64", "264"]);
+      const parsed = tryParseBigInt(s);
+      if (parsed !== null) {
+        if (parsed === ANSWER) return "right";
+        if (parsed === ANSWER + 1n) return "warm"; // off-by-one — common!
+        if (parsed === 64n || parsed === 1n << 64n) return "warm";
+      }
+      if (closeWrongs.has(s)) return "warm";
+      // Worded answer
+      if (s.includes("morethanthere") || s.includes("infinity") || s.includes("infinite"))
+        return "warm";
+      return "cold";
+    }
+
+    let warmCount = 0;
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const verdict = check(input.value);
+      form.classList.remove("is-wrong", "is-right");
+      hint.classList.remove("is-warm", "is-right");
+
+      if (verdict === "right") {
+        form.classList.add("is-right");
+        hint.classList.add("is-right");
+        hint.textContent = "the door yields.";
+        unlock(false);
+        return;
+      }
+      if (verdict === "warm") {
+        warmCount++;
+        form.classList.add("is-wrong");
+        hint.classList.add("is-warm");
+        hint.textContent = warmCount >= 2
+          ? "closer. the sum of a doubling: subtract one from the next."
+          : "warmer. but count the grains, not the squares.";
+      } else if (verdict === "empty") {
+        hint.textContent = "a number — or the expression that names it";
+      } else {
+        form.classList.add("is-wrong");
+        hint.textContent = "try again. a number, or the expression that names it.";
+      }
+      input.select();
+    });
+
+    // Expose a callable for console solvers.
+    window.unlock = function (answer) {
+      const v = check(String(answer));
+      if (v === "right") { unlock(false); return "the cabinet is open."; }
+      if (v === "warm")  { return "warmer. but not quite."; }
+      return "cold.";
+    };
   }
 
   /* ──────────────────────────────────────────────
@@ -237,6 +377,7 @@
     initDisplayAxis();
     initAnchors();
     initSignature();
+    initPuzzle();
   }
 
   if (document.readyState === "loading") {

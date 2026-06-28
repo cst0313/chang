@@ -19,6 +19,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=Inter+Tight:wght@300..700&family=JetBrains+Mono:wght@300;400;500&display=swap" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=Inter+Tight:wght@300..700&family=JetBrains+Mono:wght@300;400;500&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&display=swap" />
 
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -80,7 +81,9 @@
         <span class="display-line">Chang<span class="period">.</span></span>
       </h1>
 
-      <div class="threshold-coords reveal" data-stagger="2">
+      <p class="display-cn reveal" data-stagger="2" lang="zh-Hant" aria-label="Chinese name: Cheung Sin To">張善濤</p>
+
+      <div class="threshold-coords reveal" data-stagger="3">
         <span>51.4988° N</span>
         <span class="dot">·</span>
         <span>London</span>
@@ -90,7 +93,7 @@
         <span>香港</span>
       </div>
 
-      <p class="threshold-line reveal" data-stagger="3">
+      <p class="threshold-line reveal" data-stagger="4">
         He builds instruments for problems
         <span class="serif-italic">that have not been measured yet.</span>
       </p>
@@ -99,7 +102,7 @@
         <path d="M0 30 Q 180 0 360 30 T 720 30 T 1080 30 T 1440 30" fill="none" stroke="currentColor" stroke-width="1" />
       </svg>
 
-      <a href="#origin" class="scroll-cue reveal" data-stagger="4" aria-label="Begin">
+      <a href="#origin" class="scroll-cue reveal" data-stagger="5" aria-label="Begin">
         <span class="scroll-cue-text">Begin</span>
         <span class="scroll-cue-line"></span>
       </a>
@@ -135,9 +138,19 @@
         <div class="origin-col origin-col-aside reveal" data-stagger="2">
           <p class="aside-line"><span class="aside-marker">/</span> St. Paul's College, Hong Kong</p>
           <p class="aside-line"><span class="aside-marker">/</span> Imperial College London, BSc Computer Science, 2027</p>
+          <p class="aside-line aside-incoming">
+            <span class="aside-marker">/</span>
+            <span lang="zh-Hant">蘇黎世</span> — ETH Zürich, exchange, autumn 2026
+            <span class="aside-pill">incoming</span>
+          </p>
           <p class="aside-line"><span class="aside-marker">/</span> Laidlaw Scholar, 2024 cohort</p>
           <p class="aside-line"><span class="aside-marker">/</span> Qube Research &amp; Technologies, summer 2025</p>
-          <p class="aside-line"><span class="aside-marker">/</span> Speaks Cantonese, English, Mandarin, Japanese</p>
+          <p class="aside-line aside-lang">
+            <span class="aside-marker">/</span>
+            <span class="lang-canto" lang="zh-Hant">廣東話</span>
+            <span class="lang-canto-rom">first</span>,
+            then English, then <span lang="zh-Hant">普通話</span>
+          </p>
         </div>
       </div>
     </div>
@@ -148,21 +161,27 @@
   <!-- ╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴╴ -->
 
   <section id="instruments" class="act act-instruments" data-act="03">
-    <div class="act-mark">
-      <span class="act-no">03</span>
-      <span class="act-name">Selected Instruments</span>
-    </div>
-
-    <div class="instruments-intro reveal">
-      <p>
-        A short, deliberate list. The years are accurate. The brevity is intentional.
-      </p>
-    </div>
-
     <ol class="instruments">
       <li class="instrument" data-instrument="i">
         <div class="instrument-meta">
           <span class="instrument-numeral">I.</span>
+          <span class="instrument-year">2019 — 2022</span>
+          <span class="instrument-place">Hong Kong</span>
+        </div>
+        <h3 class="instrument-title">
+          Three disciplines, <span class="serif-italic">one mind.</span>
+        </h3>
+        <p class="instrument-body">
+          National-level competitor for Hong Kong in three Olympiads at once — <em>Mathematics, Physics,</em> and <em>Informatics</em>. Few train at altitude in one discipline. Even fewer carry that altitude across three.
+        </p>
+        <div class="instrument-tags">
+          <span>HK Math Olympiad</span><span>HK Physics Olympiad</span><span>HK Informatics Olympiad</span>
+        </div>
+      </li>
+
+      <li class="instrument" data-instrument="ii">
+        <div class="instrument-meta">
+          <span class="instrument-numeral">II.</span>
           <span class="instrument-year">2022</span>
           <span class="instrument-place">Hong Kong</span>
         </div>
@@ -177,9 +196,9 @@
         </div>
       </li>
 
-      <li class="instrument" data-instrument="ii">
+      <li class="instrument" data-instrument="iii">
         <div class="instrument-meta">
-          <span class="instrument-numeral">II.</span>
+          <span class="instrument-numeral">III.</span>
           <span class="instrument-year">2023</span>
           <span class="instrument-place">Shing Mun River</span>
         </div>
@@ -194,9 +213,9 @@
         </div>
       </li>
 
-      <li class="instrument" data-instrument="iii">
+      <li class="instrument" data-instrument="iv">
         <div class="instrument-meta">
-          <span class="instrument-numeral">III.</span>
+          <span class="instrument-numeral">IV.</span>
           <span class="instrument-year">2024</span>
           <span class="instrument-place">Imperial College</span>
         </div>
@@ -211,9 +230,9 @@
         </div>
       </li>
 
-      <li class="instrument" data-instrument="iv">
+      <li class="instrument" data-instrument="v">
         <div class="instrument-meta">
-          <span class="instrument-numeral">IV.</span>
+          <span class="instrument-numeral">V.</span>
           <span class="instrument-year">2024</span>
           <span class="instrument-place">Laidlaw Foundation</span>
         </div>
@@ -228,9 +247,9 @@
         </div>
       </li>
 
-      <li class="instrument" data-instrument="v">
+      <li class="instrument" data-instrument="vi">
         <div class="instrument-meta">
-          <span class="instrument-numeral">V.</span>
+          <span class="instrument-numeral">VI.</span>
           <span class="instrument-year">2025</span>
           <span class="instrument-place">Canary Wharf</span>
         </div>
@@ -242,6 +261,23 @@
         </p>
         <div class="instrument-tags">
           <span>Quantitative research</span><span>Systematic trading</span>
+        </div>
+      </li>
+
+      <li class="instrument instrument-future" data-instrument="vii">
+        <div class="instrument-meta">
+          <span class="instrument-numeral">VII.</span>
+          <span class="instrument-year">2026 →</span>
+          <span class="instrument-place" lang="zh-Hant">蘇黎世</span>
+        </div>
+        <h3 class="instrument-title">
+          <span class="serif-italic">Zürich,</span> next.
+        </h3>
+        <p class="instrument-body">
+          Exchange semester at <em>ETH Zürich</em>, the school where Einstein learned to be wrong about gravity. Coursework in machine learning theory, optimisation, and whichever corner of the Department of Computer Science is currently most uncomfortable to be in.
+        </p>
+        <div class="instrument-tags">
+          <span>ETH Zürich</span><span>Exchange</span><span>Incoming</span>
         </div>
       </li>
     </ol>
@@ -339,10 +375,10 @@
   <footer class="finis">
     <div class="finis-left">
       <span class="finis-glyph">JC</span>
-      <span class="finis-line">Jeffrey Chang. London via <span class="cn">香港</span>.</span>
+      <span class="finis-line">Jeffrey Chang. <span class="cn">香港 → 倫敦 → 蘇黎世</span>.</span>
     </div>
     <div class="finis-center">
-      <span class="finis-tiny">This page weighs less than a single photograph.</span>
+      <span class="finis-tiny"><span lang="zh-Hant">母語</span> — written by hand</span>
     </div>
     <div class="finis-right">
       <span class="finis-tiny">© <span id="year">2026</span> — Index 01</span>

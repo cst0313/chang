@@ -507,11 +507,78 @@ img, svg {
   max-width: 18ch;
   text-wrap: balance;
 }
+/* The plate — a clipping from an antique book, in dialogue with the head. */
+.origin-plate {
+  margin: clamp(2.4rem, 5vh, 4rem) 0 clamp(1.5rem, 3vh, 2.4rem);
+  max-width: min(880px, 100%);
+  position: relative;
+  isolation: isolate;
+}
+.origin-plate::before {
+  content: "";
+  position: absolute;
+  inset: -0.5rem;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.5), rgba(255,255,255,0) 30%),
+    var(--paper-soft);
+  border: 1px solid var(--ink-line);
+  z-index: -1;
+  transform: rotate(-0.4deg);
+}
+.origin-plate picture,
+.origin-plate img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.origin-plate img {
+  filter: sepia(28%) saturate(82%) contrast(0.97) brightness(1.04);
+  box-shadow: 0 18px 40px -22px rgba(22,20,18,0.32);
+  transition: filter var(--d-norm) var(--ease-out-expo);
+}
+.origin-plate:hover img {
+  filter: sepia(18%) saturate(96%) contrast(1.0) brightness(1.02);
+}
+.origin-plate-cap {
+  margin-top: 0.9rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em 0.9em;
+  align-items: baseline;
+  font-family: var(--f-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.origin-plate-no { color: var(--currents); }
+.origin-plate-sep { color: var(--ink-faint); }
+.origin-plate-text {
+  text-transform: none;
+  letter-spacing: 0.01em;
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-weight: 360;
+  font-size: 0.95rem;
+  color: var(--ink-muted);
+  max-width: 56ch;
+  font-variation-settings: "opsz" 36, "SOFT" 60;
+}
+.origin-plate-text em {
+  font-style: normal;
+  font-family: var(--f-mono);
+  font-size: 0.78em;
+  letter-spacing: 0.06em;
+  color: var(--ink-faint);
+  vertical-align: 0.05em;
+  margin-right: 0.1em;
+}
+
 .origin-cols {
   display: grid;
   grid-template-columns: 1fr;
   gap: clamp(2.5rem, 6vw, 7rem);
-  margin-top: clamp(3rem, 8vh, 6rem);
+  margin-top: clamp(2rem, 5vh, 3.5rem);
 }
 @media (min-width: 920px) {
   .origin-cols {

@@ -13,18 +13,22 @@
   const isTouch = matchMedia("(hover: none), (pointer: coarse)").matches;
 
   /* ──────────────────────────────────────────────
-     Custom cursor — eased follow + hover state.
+     Custom cursor + aura — soft gradient orb trails
+     a few frames behind the precise dot, both follow
+     the mouse on a lerp. The aura is what gives the
+     page its "alive" feel; the cursor stays sharp.
      ────────────────────────────────────────────── */
   function initCursor() {
     if (isTouch || prefersReduced) return;
 
     const cursor = document.querySelector(".cursor");
+    const aura   = document.querySelector(".aura");
     if (!cursor) return;
 
     let mx = window.innerWidth / 2;
     let my = window.innerHeight / 2;
-    let cx = mx;
-    let cy = my;
+    let cx = mx, cy = my;
+    let ax = mx, ay = my;
 
     window.addEventListener("pointermove", (e) => {
       mx = e.clientX;
@@ -32,10 +36,10 @@
     }, { passive: true });
 
     window.addEventListener("pointerdown", () => cursor.classList.add("is-down"));
-    window.addEventListener("pointerup", () => cursor.classList.remove("is-down"));
-    window.addEventListener("pointerleave", () => cursor.classList.remove("is-hover"));
+    window.addEventListener("pointerup",   () => cursor.classList.remove("is-down"));
+    window.addEventListener("pointerleave",() => cursor.classList.remove("is-hover"));
 
-    const hoverables = "a, button, [data-cursor='hover'], .instrument, .reach-link";
+    const hoverables = "a, button, [data-cursor='hover'], .instrument, .reach-link, .principle, .stat";
     document.addEventListener("pointerover", (e) => {
       if (e.target.closest(hoverables)) cursor.classList.add("is-hover");
     });
@@ -46,9 +50,12 @@
     });
 
     function loop() {
-      cx += (mx - cx) * 0.22;
-      cy += (my - cy) * 0.22;
+      cx += (mx - cx) * 0.24;
+      cy += (my - cy) * 0.24;
+      ax += (mx - ax) * 0.06;   // aura lags further behind, feels thoughtful
+      ay += (my - ay) * 0.06;
       cursor.style.transform = `translate3d(${cx}px, ${cy}px, 0)`;
+      if (aura) aura.style.transform = `translate3d(${ax}px, ${ay}px, 0)`;
       requestAnimationFrame(loop);
     }
     requestAnimationFrame(loop);
@@ -100,6 +107,7 @@
 
     document.querySelectorAll(".act").forEach(el => io.observe(el));
     document.querySelectorAll(".instrument").forEach(el => io.observe(el));
+    document.querySelectorAll(".principle").forEach(el => io.observe(el));
 
     // Active nav highlight as the reader passes each act.
     const navLinks = document.querySelectorAll(".frame-nav a");
@@ -151,6 +159,111 @@
   function initYear() {
     const el = document.getElementById("year");
     if (el) el.textContent = new Date().getFullYear();
+  }
+
+  /* ──────────────────────────────────────────────
+     Split the hero into individual characters so
+     each one can choreograph its own entrance.
+     ────────────────────────────────────────────── */
+  function initLetterSplit() {
+    // Latin display — split per character, preserve the .period span
+    document.querySelectorAll("[data-split]").forEach((root) => {
+      const lines = root.querySelectorAll(".display-line");
+      let i = 0;
+      const start = prefersReduced ? 0 : 700; // wait for curtain
+      const step  = prefersReduced ? 0 : 55;
+      lines.forEach((line) => {
+        const periodEl = line.querySelector(".period");
+        const text = periodEl ? line.firstChild.textContent : line.textContent;
+        line.textContent = "";
+        for (const ch of text) {
+          const s = document.createElement("span");
+          s.className = "char";
+          s.textContent = ch === " " ? " " : ch;
+          s.style.setProperty("--char-delay", (start + i * step) + "ms");
+          i++;
+          line.appendChild(s);
+        }
+        if (periodEl) {
+          const p = document.createElement("span");
+          p.className = "char period";
+          p.textContent = ".";
+          p.style.setProperty("--char-delay", (start + i * step + 80) + "ms");
+          line.appendChild(p);
+          i++;
+        }
+      });
+    });
+
+    // CJK — one span per grapheme
+    document.querySelectorAll("[data-split-cjk]").forEach((root) => {
+      const text = root.textContent;
+      const start = prefersReduced ? 0 : 1700;
+      const step  = prefersReduced ? 0 : 130;
+      root.textContent = "";
+      let i = 0;
+      for (const ch of text) {
+        const s = document.createElement("span");
+        s.className = "char-cjk";
+        s.textContent = ch;
+        s.style.setProperty("--char-delay", (start + i * step) + "ms");
+        i++;
+        root.appendChild(s);
+      }
+    });
+  }
+
+  /* ──────────────────────────────────────────────
+     Stat counters — count up from zero when their
+     parent section enters the viewport.
+     ────────────────────────────────────────────── */
+  function initStats() {
+    const stats = document.querySelectorAll(".stat-num[data-count]");
+    if (!stats.length) return;
+
+    stats.forEach((el) => {
+      const suffix = el.getAttribute("data-suffix") || "";
+      const target = parseInt(el.getAttribute("data-count"), 10) || 0;
+      el.textContent = "";
+      const numSpan = document.createElement("span");
+      numSpan.className = "stat-num-value";
+      numSpan.textContent = prefersReduced ? String(target) : "0";
+      const sufSpan = document.createElement("span");
+      sufSpan.className = "stat-num-suffix";
+      sufSpan.textContent = suffix.trim();
+      el.appendChild(numSpan);
+      if (suffix.trim()) el.appendChild(sufSpan);
+
+      if (prefersReduced) return;
+      el._countTarget = target;
+      el._numSpan = numSpan;
+    });
+
+    if (prefersReduced) return;
+
+    const counted = new WeakSet();
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.querySelectorAll(".stat-num[data-count]").forEach((el) => {
+          if (counted.has(el)) return;
+          counted.add(el);
+          const target = el._countTarget;
+          const numSpan = el._numSpan;
+          if (!numSpan) return;
+          const dur = 1400;
+          const t0 = performance.now() + 500;
+          function tick(now) {
+            const t = Math.min(1, Math.max(0, (now - t0) / dur));
+            const eased = 1 - Math.pow(1 - t, 4);
+            numSpan.textContent = String(Math.round(target * eased));
+            if (t < 1) requestAnimationFrame(tick);
+          }
+          requestAnimationFrame(tick);
+        });
+      });
+    }, { threshold: 0.2 });
+    document.querySelectorAll(".act-threshold").forEach((s) => io.observe(s));
   }
 
   /* ──────────────────────────────────────────────
@@ -369,6 +482,8 @@
      Boot.
      ────────────────────────────────────────────── */
   function boot() {
+    initLetterSplit();
+    initStats();
     initCursor();
     initProgress();
     initReveals();

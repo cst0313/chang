@@ -50,11 +50,11 @@
       </a>
     </div>
     <nav class="frame-nav" aria-label="Index">
-      <a href="#origin" data-step="02">Origin</a>
-      <a href="#instruments" data-step="03">Instruments</a>
-      <a href="#method" data-step="04">Method</a>
-      <a href="#currently" data-step="05">Currently</a>
-      <a href="#reach" data-step="06">Reach</a>
+      <a href="#origin">Origin</a>
+      <a href="#instruments">Instruments</a>
+      <a href="#method">Method</a>
+      <a href="#currently">Currently</a>
+      <a href="#reach">Reach</a>
     </nav>
     <div class="frame-right">
       <span class="frame-clock" data-clock="london">
@@ -72,7 +72,6 @@
 
   <section id="threshold" class="act act-threshold" data-act="01">
     <div class="act-mark">
-      <span class="act-no">01 / 06</span>
       <span class="act-name">Threshold</span>
     </div>
 
@@ -117,7 +116,6 @@
 
   <section id="origin" class="act act-origin" data-act="02">
     <div class="act-mark">
-      <span class="act-no">02</span>
       <span class="act-name">Origin</span>
     </div>
 
@@ -134,19 +132,21 @@
         </div>
 
         <div class="origin-col origin-col-aside reveal" data-stagger="2">
-          <p class="aside-line"><span class="aside-marker">/</span> St.&nbsp;Paul's&nbsp;College, Hong&nbsp;Kong</p>
-          <p class="aside-line"><span class="aside-marker">/</span> Imperial&nbsp;College&nbsp;London, BSc Computer Science, 2027</p>
-          <p class="aside-line aside-incoming">
-            <span class="aside-marker">/</span>
-            <span lang="zh-Hant">蘇黎世</span> — ETH&nbsp;Zürich, exchange, autumn 2026
-            <span class="aside-pill">incoming</span>
-          </p>
-          <p class="aside-line"><span class="aside-marker">/</span> Laidlaw Scholar, 2024 cohort</p>
-          <p class="aside-line"><span class="aside-marker">/</span> Qube&nbsp;Research&nbsp;&amp;&nbsp;Technologies, summer 2025</p>
-          <p class="aside-line aside-lang">
-            <span class="aside-marker">/</span>
-            <span class="lang-canto" lang="zh-Hant">廣東話</span><span class="lang-canto-rom">first</span>, then English, then <span lang="zh-Hant">普通話</span>
-          </p>
+          <div class="aside-group">
+            <p class="aside-head">Education</p>
+            <p class="aside-line">St.&nbsp;Paul's&nbsp;College — Hong&nbsp;Kong</p>
+            <p class="aside-line">Imperial&nbsp;College&nbsp;London — BSc Computer Science, 2027</p>
+            <p class="aside-line aside-incoming">ETH&nbsp;Zürich — exchange, autumn 2026 <span class="aside-pill">incoming</span></p>
+          </div>
+          <div class="aside-group">
+            <p class="aside-head">Work</p>
+            <p class="aside-line">Qube&nbsp;Research&nbsp;&amp;&nbsp;Technologies — summer 2025</p>
+            <p class="aside-line">Laidlaw Scholar — 2024 cohort</p>
+          </div>
+          <div class="aside-group">
+            <p class="aside-head">Languages</p>
+            <p class="aside-line aside-lang"><span lang="zh-Hant">廣東話</span>, English, <span lang="zh-Hant">普通話</span></p>
+          </div>
         </div>
       </div>
     </div>
@@ -195,12 +195,10 @@
         <h3 class="instrument-title">
           <span class="serif-italic">Project&nbsp;Oyster.</span>
         </h3>
-        <p class="instrument-body">
-          A way to read microplastic concentration from the wind, without going in the water. Surface plastic measurably slows waves, so the well-known wind-to-wave-speed relation breaks. The physics-informed neural network learns the clean mapping from open ocean and reads the deviation as a microplastic signal — the wider the gap, the higher the concentration.
-        </p>
-        <p class="instrument-body">
-          People ask about the deep ocean. The deep is where plastic mass eventually settles, past the reach of any cleanup; the surface is where intervention is still possible.<sup class="cite"><a href="https://www.science.org/doi/10.1126/science.aba5899" target="_blank" rel="noopener" aria-label="Kane et al., Science, 2020">1</a></sup> Champion of the HKSTP–St.&nbsp;John's&nbsp;College Hackathon.
-        </p>
+        <div class="instrument-body">
+          <p>A way to read microplastic concentration from the wind, without going in the water. Surface plastic measurably slows waves, so the well-known wind-to-wave-speed relation breaks. The physics-informed neural network learns the clean mapping from open ocean and reads the deviation as a microplastic signal — the wider the gap, the higher the concentration.</p>
+          <p>People ask about the deep ocean. The deep is where plastic mass eventually settles, past the reach of any cleanup; the surface is where intervention is still possible.<sup class="cite"><a href="https://www.science.org/doi/10.1126/science.aba5899" target="_blank" rel="noopener" aria-label="Kane et al., Science, 2020">1</a></sup> Champion of the HKSTP–St.&nbsp;John's&nbsp;College Hackathon.</p>
+        </div>
       </li>
 
       <li class="instrument" data-instrument="iv">
@@ -235,14 +233,14 @@
         <div class="instrument-meta">
           <span class="instrument-numeral">VI.</span>
           <span class="instrument-year">2025</span>
-          <span class="instrument-place">Canary Wharf</span>
+          <span class="instrument-place">Victoria, London</span>
         </div>
         <h3 class="instrument-title">
-          Instruments for <span class="serif-italic">markets that do not sleep.</span>
+          <span class="serif-italic">Qube&nbsp;Research&nbsp;&amp;&nbsp;Technologies.</span>
         </h3>
-        <p class="instrument-body">
-          Summer at <em>Qube&nbsp;Research&nbsp;&amp;&nbsp;Technologies</em>, working alongside people who treat a tenth of a basis point the way a watchmaker treats a tenth of a second.
-        </p>
+        <div class="instrument-body">
+          <p>Quantitative research, summer 2025.</p>
+        </div>
       </li>
 
       <li class="instrument instrument-future" data-instrument="vii">
@@ -267,7 +265,6 @@
 
   <section id="method" class="act act-method" data-act="04">
     <div class="act-mark">
-      <span class="act-no">04</span>
       <span class="act-name">Method</span>
     </div>
 
@@ -348,7 +345,6 @@
 
   <section id="currently" class="act act-currently" data-act="05">
     <div class="act-mark">
-      <span class="act-no">05</span>
       <span class="act-name">Currently</span>
     </div>
 
@@ -380,7 +376,6 @@
 
   <section id="reach" class="act act-reach" data-act="06">
     <div class="act-mark">
-      <span class="act-no">06</span>
       <span class="act-name">Reach</span>
     </div>
 
@@ -476,7 +471,6 @@
 
   <section id="cabinet" class="act act-cabinet" data-act="08" aria-hidden="true">
     <div class="act-mark">
-      <span class="act-no">08</span>
       <span class="act-name">Cabinet</span>
     </div>
 

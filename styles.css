@@ -1132,55 +1132,6 @@ img, svg {
 }
 
 /* ─────────────────────────────────────────────────
-   ACT IV — Currently
-   ───────────────────────────────────────────────── */
-.currently-inner {
-  max-width: var(--max);
-  margin: auto 0;
-  width: 100%;
-  padding-top: 3rem;
-}
-.notebook {
-  list-style: none;
-  margin-top: clamp(3rem, 7vh, 6rem);
-  max-width: 64rem;
-  border-top: 1px solid var(--ink-line);
-}
-.notebook li {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.4rem 2rem;
-  padding: 1.4rem 0;
-  border-bottom: 1px solid var(--ink-line);
-}
-@media (min-width: 720px) {
-  .notebook li {
-    grid-template-columns: 9rem 1fr;
-    gap: 0 4rem;
-    padding: 1.6rem 0;
-    align-items: baseline;
-  }
-}
-.notebook-tag {
-  font-family: var(--f-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--ink-muted);
-}
-.notebook-line {
-  font-family: var(--f-serif);
-  font-size: clamp(1.05rem, 1.2vw, 1.3rem);
-  line-height: 1.5;
-  letter-spacing: -0.01em;
-  font-weight: 340;
-  color: var(--ink);
-  font-variation-settings: "opsz" 36, "SOFT" 40;
-  max-width: 56ch;
-  text-wrap: pretty;
-}
-
-/* ─────────────────────────────────────────────────
    ACT V — Reach
    ───────────────────────────────────────────────── */
 .act-reach {

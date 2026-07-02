@@ -466,12 +466,12 @@ img, svg {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url("img/city-fog.jpg");
+  background-image: url("img/hero-skyline.jpg");
+  background-image: image-set(url("img/hero-skyline.webp") type("image/webp"), url("img/hero-skyline.jpg") type("image/jpeg"));
   background-size: cover;
-  background-position: 60% 35%;
+  background-position: center bottom;
   background-repeat: no-repeat;
-  opacity: 0.20;
-  filter: grayscale(1) contrast(1.05) brightness(1.1);
+  opacity: 0.5;
   mix-blend-mode: multiply;
   z-index: -2;
 }
@@ -480,8 +480,8 @@ img, svg {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(80% 60% at 30% 40%, transparent 0%, var(--paper) 70%),
-    linear-gradient(to bottom, var(--paper) 0%, rgba(244,239,230,0.4) 30%, rgba(244,239,230,0.4) 70%, var(--paper) 100%);
+    linear-gradient(to bottom, rgba(244,239,230,0.55) 0%, rgba(244,239,230,0.15) 45%, rgba(244,239,230,0.55) 88%, var(--paper) 100%),
+    linear-gradient(to right, rgba(244,239,230,0.5) 0%, transparent 25%, transparent 75%, rgba(244,239,230,0.5) 100%);
   z-index: -1;
   pointer-events: none;
 }
@@ -695,17 +695,12 @@ img, svg {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: image-set(
-    url("img/harbour-fog.webp") type("image/webp"),
-    url("img/harbour-fog.jpg") type("image/jpeg")
-  );
-  background-image: url("img/harbour-fog.webp");
-  background-image: url("img/harbour-fog.jpg");
+  background-image: url("img/harbour-ferry.jpg");
+  background-image: image-set(url("img/harbour-ferry.webp") type("image/webp"), url("img/harbour-ferry.jpg") type("image/jpeg"));
   background-size: cover;
-  background-position: 58% 50%;
+  background-position: center 70%;
   background-repeat: no-repeat;
-  opacity: 0.32;
-  filter: grayscale(1) contrast(1.06) brightness(1.06);
+  opacity: 0.5;
   mix-blend-mode: multiply;
   z-index: -2;
 }
@@ -714,14 +709,10 @@ img, svg {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(120% 80% at 50% 50%, transparent 0%, var(--paper) 75%),
-    linear-gradient(to right, var(--paper) 0%, rgba(244,239,230,0.55) 35%, rgba(244,239,230,0.55) 65%, var(--paper) 100%),
-    linear-gradient(to bottom, var(--paper) 0%, rgba(244,239,230,0.0) 22%, rgba(244,239,230,0.0) 78%, var(--paper) 100%);
+    linear-gradient(to bottom, var(--paper) 0%, rgba(244,239,230,0.3) 30%, rgba(244,239,230,0.3) 75%, var(--paper) 100%),
+    linear-gradient(to right, rgba(244,239,230,0.45) 0%, transparent 30%, transparent 70%, rgba(244,239,230,0.45) 100%);
   z-index: -1;
   pointer-events: none;
-}
-@media (prefers-reduced-motion: reduce) {
-  .act-origin::before { opacity: 0.22; }
 }
 
 .origin-inner {
@@ -887,6 +878,35 @@ img, svg {
 }
 .instrument-body { max-width: none; }
 .instrument-body p { max-width: 64ch; }
+
+/* Book-plates — engraved figures beside the entries that have one. */
+.instrument-plate {
+  display: none;
+  margin: 0;
+}
+.instrument-plate img {
+  width: 100%;
+  height: auto;
+  mix-blend-mode: multiply;
+  opacity: 0.9;
+  transition: opacity var(--d-norm) var(--ease-out-expo), transform 900ms var(--ease-out-expo);
+}
+@media (min-width: 1180px) {
+  .instrument {
+    grid-template-columns: 200px minmax(0, 1fr) 180px;
+    gap: 0.4rem 3rem;
+  }
+  .instrument-plate {
+    display: block;
+    grid-column: 3;
+    grid-row: 1 / 3;
+    align-self: center;
+  }
+  .instrument:hover .instrument-plate img {
+    opacity: 1;
+    transform: scale(1.025) rotate(0.4deg);
+  }
+}
 .instrument:hover {
   padding-left: clamp(0.5rem, 1.5vw, 1.4rem);
 }
@@ -996,6 +1016,21 @@ img, svg {
 .act-method {
   position: relative;
   isolation: isolate;
+  overflow: hidden;
+}
+.act-method::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("img/method-sheet.jpg");
+  background-image: image-set(url("img/method-sheet.webp") type("image/webp"), url("img/method-sheet.jpg") type("image/jpeg"));
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.10;
+  mix-blend-mode: multiply;
+  z-index: -1;
+  pointer-events: none;
 }
 .method-inner {
   max-width: var(--max);
@@ -1134,6 +1169,26 @@ img, svg {
 /* ─────────────────────────────────────────────────
    ACT — Currently
    ───────────────────────────────────────────────── */
+.act-currently {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-bottom: clamp(8rem, 16vh, 12rem);
+}
+.act-currently::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("img/ridgeline.jpg");
+  background-image: image-set(url("img/ridgeline.webp") type("image/webp"), url("img/ridgeline.jpg") type("image/jpeg"));
+  background-size: 100% auto;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  opacity: 0.42;
+  mix-blend-mode: multiply;
+  z-index: -1;
+  pointer-events: none;
+}
 .currently-inner {
   max-width: var(--max);
   margin: auto 0;
@@ -1191,7 +1246,26 @@ img, svg {
    ACT V — Reach
    ───────────────────────────────────────────────── */
 .act-reach {
-  padding-bottom: 5rem;
+  padding-bottom: 9rem;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.act-reach::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("img/lighthouse.jpg");
+  background-image: image-set(url("img/lighthouse.webp") type("image/webp"), url("img/lighthouse.jpg") type("image/jpeg"));
+  background-size: min(900px, 90%) auto;
+  background-position: right bottom;
+  background-repeat: no-repeat;
+  opacity: 0.4;
+  mix-blend-mode: multiply;
+  z-index: -1;
+  pointer-events: none;
+  -webkit-mask-image: radial-gradient(130% 130% at 100% 100%, black 45%, transparent 75%);
+  mask-image: radial-gradient(130% 130% at 100% 100%, black 45%, transparent 75%);
 }
 .reach-inner {
   max-width: var(--max);
@@ -1536,6 +1610,16 @@ img, svg {
 .cabinet-aside {
   border-top: 1px solid var(--ink-line);
   padding-top: 1.8rem;
+}
+.cabinet-plate {
+  margin: 0 0 1.6rem;
+  max-width: 300px;
+}
+.cabinet-plate img {
+  width: 100%;
+  height: auto;
+  mix-blend-mode: multiply;
+  opacity: 0.92;
 }
 .cabinet-mono {
   font-family: var(--f-mono);

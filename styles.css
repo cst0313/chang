@@ -532,6 +532,44 @@ img, svg {
   animation-name: periodIn;
   animation-duration: 1300ms;
 }
+
+/* The living period — a WebGL drop of ink over the typeset glyph. */
+.period-live {
+  position: absolute;
+  left: 50%;
+  bottom: 0.052em;
+  width: 0.135em;
+  height: 0.135em;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  overflow: hidden;
+  display: block;
+  pointer-events: none;
+}
+.period-live canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+.display .period.has-live-ink {
+  color: transparent;
+  -webkit-text-stroke: 0;
+}
+
+/* The cabinet's breathing ground. */
+.cabinet-shader {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.30;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+.cabinet-shader canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
 .display-cn .char-cjk {
   filter: blur(6px);
   transform: translateY(20px) scale(0.97);
